@@ -1,0 +1,13 @@
+- hosts: localhost
+  tasks:
+  - name: Download Apache Maven, unarchives it if not exists 
+    unarchive: 
+      copy: no
+      src: "http://www-eu.apache.org/dist/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz"
+      dest: /usr/local/bin
+      remote_src: True
+      creates: /usr/local/bin/apache-maven-3.5.0
+    become: yes
+
+  - name: Update path for maven use
+    shell: export PATH=/usr/local/bin/apache-maven-3.5.0:$PATH
